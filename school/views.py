@@ -27,3 +27,4 @@ def login(request):
 def report_card(request):
     # Implement report card generation logic here
     pass
+
