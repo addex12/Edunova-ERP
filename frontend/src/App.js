@@ -1,18 +1,34 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import logo from './logo.svg';
-import './App.css';
-import Login from './pages/Login';
+import { QueryClientProvider } from "@tanstack/react-query";
+import { Routes, Route } from "wouter"; // Changed from Switch
+import { queryClient } from "./lib/queryClient";
+import { Toaster } from "@/components/ui/toaster";
+import { AuthProvider } from "@/hooks/use-auth";
+import NotFound from "@/pages/not-found";
+import AuthPage from "@/pages/auth-page";
+import DashboardPage from "@/pages/dashboard-page";
+import { ProtectedRoute } from "./lib/protected-route";
+import LoginPage from "@/pages/login-page"; // Added Login Page
+
+function Router() {
+  return (
+    <Routes>
+      <ProtectedRoute path="/" component={DashboardPage} />
+      <Route path="/auth" component={AuthPage} />
+      <Route path="/login" component={LoginPage} /> {/* Added Login route */}
+      <Route component={NotFound} />
+    </Routes>
+  );
+}
 
 function App() {
-    return (
-        <Router>
-            <Switch>
-                <Route path="/login" component={Login} />
-                {/* Add other routes for Register, Dashboard, etc. */}
-            </Switch>
-        </Router>
-    );
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <Router />
+        <Toaster />
+      </AuthProvider>
+    </QueryClientProvider>
+  );
 }
 
 export default App;
