@@ -1,67 +1,75 @@
 
-from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.core.validators import MinValueValidator, MaxValueValidator
+# 🎓 Edunova ERP
 
-class User(AbstractUser):
-    ROLES = (
-        ('student', 'Student'),
-        ('parent', 'Parent'),
-        ('teacher', 'Teacher'),
-        ('head', 'Head of School'),
-        ('staff', 'Staff'),
-    )
-    role = models.CharField(max_length=20, choices=ROLES)
-    phone = models.CharField(max_length=15, blank=True)
-    address = models.TextField(blank=True)
-    
-class Student(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    admission_number = models.CharField(max_length=20, unique=True)
-    class_grade = models.CharField(max_length=10)
-    parent = models.ForeignKey('Parent', on_delete=models.SET_NULL, null=True)
-    date_of_birth = models.DateField()
+A modern, web-based School Management System built with Django that streamlines educational administration.
 
-class Parent(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    occupation = models.CharField(max_length=100)
-    students = models.ManyToManyField(Student, related_name='parents')
+## ✨ Key Features
 
-class Teacher(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    subjects = models.ManyToManyField('Subject')
-    qualification = models.CharField(max_length=100)
+- **Multi-User Authentication**
+  - Student Portal
+  - Parent Dashboard
+  - Teacher Interface
+  - Administrative Controls
 
-class Subject(models.Model):
-    name = models.CharField(max_length=100)
-    code = models.CharField(max_length=10, unique=True)
-    
-class GradingScale(models.Model):
-    name = models.CharField(max_length=50)
-    min_score = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
-    max_score = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
-    grade = models.CharField(max_length=2)
-    
-class ReportCard(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    term = models.CharField(max_length=20)
-    academic_year = models.CharField(max_length=9)
-    date_generated = models.DateTimeField(auto_now_add=True)
-    template = models.ForeignKey('ReportTemplate', on_delete=models.PROTECT)
-    
-class ReportTemplate(models.Model):
-    name = models.CharField(max_length=100)
-    content = models.TextField()  # HTML template with placeholders
-    
-class Grade(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    score = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
-    term = models.CharField(max_length=20)
-    academic_year = models.CharField(max_length=9)
-    teacher = models.ForeignKey(Teacher, on_delete=models.SET_NULL, null=True)
-    date_recorded = models.DateTimeField(auto_now_add=True)
-    
-    class Meta:
-        unique_together = ['student', 'subject', 'term', 'academic_year']
+- **Academic Management**
+  - Custom Report Card Generation
+  - Grade Management
+  - Student Performance Tracking
+  - Attendance Monitoring
+
+- **Data Management**
+  - Bulk Import Tools for Students
+  - Teacher Data Management
+  - Grade Import Functionality
+  - Secure Data Storage
+
+## 🚀 Quick Start
+
+1. **Setup Database**
+   ```bash
+   # Configure PostgreSQL database settings in settings.py
+   python manage.py migrate
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Launch Server**
+   ```bash
+   python manage.py runserver
+   ```
+
+## 💡 Usage
+
+1. Access the registration page to create a new account
+2. Login with your credentials
+3. Navigate through the dashboard based on your user role
+4. Generate reports and manage academic data
+
+## 🛠️ Tech Stack
+
+- Django 4.0+
+- PostgreSQL
+- Python 3.x
+
+## 📝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 👥 Team
+
+Maintained by the Edunova Development Team.
+
+---
+Built with ❤️ using Django and Replit
 
