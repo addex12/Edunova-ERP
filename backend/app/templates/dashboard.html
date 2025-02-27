@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edunova ERP Backend Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .endpoint {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .endpoint h2 {
+            margin: 0;
+            color: #3498db;
+        }
+        .endpoint p {
+            margin: 5px 0;
+        }
+        .endpoint .method {
+            font-weight: bold;
+            color: #e67e22;
+        }
+        .endpoint .url {
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edunova ERP Backend Dashboard</h1>
+    <p>Welcome to the Edunova ERP backend! Below are the available endpoints:</p>
+<div class="endpoint">
+    <h2>Dynamic Endpoint Listing</h2>
+    {% for route in routes %}
+    <p>
+        <span class="method">{{ route.methods|join(', ') }}</span>
+        <span class="url">{{ route.url }}</span>
+    </p>
+    {% endfor %}
+</div>
+    <div class="endpoint">
+        <h2>Root Route</h2>
+        <p><span class="method">GET</span> <span class="url">/</span></p>
+        <p>Displays a welcome message and lists all available endpoints.</p>
+    </div>
+
+    <div class="endpoint">
+        <h2>User Registration</h2>
+        <p><span class="method">POST</span> <span class="url">/api/auth/register</span></p>
+        <p>Register a new user (student, teacher, parent, or admin).</p>
+    </div>
+
+    <div class="endpoint">
+        <h2>User Login</h2>
+        <p><span class="method">POST</span> <span class="url">/api/auth/login</span></p>
+        <p>Authenticate and receive a JWT token.</p>
+    </div>
+
+    <div class="endpoint">
+        <h2>Dashboard</h2>
+        <p><span class="method">GET</span> <span class="url">/api/dashboard</span></p>
+        <p>View user-specific dashboard data (requires authentication).</p>
+    </div>
+
+    <div class="endpoint">
+        <h2>Admin Endpoints</h2>
+        <p><span class="method">GET</span> <span class="url">/api/admin/users</span></p>
+        <p>List all users (admin only).</p>
+        <p><span class="method">DELETE</span> <span class="url">/api/admin/users/{id}</span></p>
+        <p>Delete a user (admin only).</p>
+    </div>
+
+    <div class="endpoint">
+        <h2>Report Card Endpoints</h2>
+        <p><span class="method">POST</span> <span class="url">/api/reports/templates</span></p>
+        <p>Create a new report card template (admin/teacher only).</p>
+        <p><span class="method">POST</span> <span class="url">/api/reports/generate/{student_id}</span></p>
+        <p>Generate a report card for a student (admin/teacher only).</p>
+    </div>
+
+    <div class="endpoint">
+        <h2>Data Import/Export</h2>
+        <p><span class="method">POST</span> <span class="url">/api/data/import/students</span></p>
+        <p>Import student data from a CSV file (admin only).</p>
+    </div>
+</body>
+</html>
