@@ -1,15 +1,14 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template, url_for
 from werkzeug.security import generate_password_hash
 from app.models import User, Student, Teacher
 from app import db
 
 # Create a Blueprint for authentication routes
 auth_bp = Blueprint('auth', __name__)
-auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/', methods=['GET'])
 def home():
-    return render_template('dashboard.html')
+    return redirect(url_for('admin.index'))
     
 @auth_bp.route('/register', methods=['POST'])
 def register():

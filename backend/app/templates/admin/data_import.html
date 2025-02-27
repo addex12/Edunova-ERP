@@ -1,0 +1,53 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h2>Data Import</h2>
+      <div class="card">
+        <div class="card-body">
+          {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+          {% endif %}
+          
+          <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="csv_file">CSV File</label>
+              <input type="file" 
+                     class="form-control-file" 
+                     id="csv_file" 
+                     name="csv_file" 
+                     accept=".csv"
+                     required>
+              <small class="form-text text-muted">
+                Supported formats: CSV (Max 10MB)
+              </small>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-upload"></i> Upload
+            </button>
+            <a href="{{ url_for('admin.index') }}" class="btn btn-secondary">
+              <i class="fas fa-times"></i> Cancel
+            </a>
+          </form>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <h4><i class="fas fa-info-circle"></i> Requirements</h4>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <strong>Column Order:</strong> ID, Name, Email, Role
+          </li>
+          <li class="list-group-item">
+            <strong>Date Format:</strong> YYYY-MM-DD
+          </li>
+          <li class="list-group-item">
+            <strong>Encoding:</strong> UTF-8
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

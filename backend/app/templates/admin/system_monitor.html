@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+    <h1>System Monitor</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">CPU Usage</div>
+                <div class="panel-body">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" 
+                             style="width: {{ stats.cpu }}%;">
+                            {{ stats.cpu }}%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Add similar panels for Memory and Disk -->
+    </div>
+</div>
+{% endblock %}

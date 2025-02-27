@@ -1,0 +1,134 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Dashboard</h1>
+      <div class="alert alert-info">
+        Welcome to the admin dashboard. Here you can manage your application's data.
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Cards Section -->
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-header">Schools</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ total_schools|default('N/A') }}</h5>
+          <p class="card-text">Total schools registered</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-header">Students</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ total_students|default('N/A') }}</h5>
+          <p class="card-text">Total students enrolled</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-header">Teachers</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ total_teachers|default('N/A') }}</h5>
+          <p class="card-text">Total registered teachers</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card text-white bg-info mb-3">
+        <div class="card-header">Reports</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ total_reports|default('N/A') }}</h5>
+          <p class="card-text">Available report templates</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- System Status Section -->
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3>System Status</h3>
+        </div>
+        <div class="card-body">
+          <div class="alert alert-warning">
+            <strong>Database Health:</strong> Ensure all migrations are applied
+          </div>
+          <p>
+            Database maintenance commands:
+            <code>flask db upgrade</code><br>
+            <small>Check model definitions match your database schema</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Links & Help Section -->
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3>Quick Actions</h3>
+        </div>
+        <div class="card-body">
+          <div class="list-group">
+            <a href="{{ url_for('admin.index') }}" class="list-group-item list-group-item-action">
+              Dashboard Home
+            </a>
+            {% if school is defined %}
+            <a href="{{ url_for('school.index_view') }}" class="list-group-item list-group-item-action">
+              Manage Schools
+            </a>
+            {% endif %}
+            {% if student is defined %}
+            <a href="{{ url_for('student.index_view') }}" class="list-group-item list-group-item-action">
+              Manage Students
+            </a>
+            {% endif %}
+            {% if teacher is defined %}
+            <a href="{{ url_for('teacher.index_view') }}" class="list-group-item list-group-item-action">
+              Manage Teachers
+            </a>
+            {% endif %}
+            {% if report is defined %}
+            <a href="{{ url_for('report.index_view') }}" class="list-group-item list-group-item-action">
+              Manage Reports
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3>Support Resources</h3>
+        </div>
+        <div class="card-body">
+          <p>Access help materials or contact technical support:</p>
+          <div class="btn-group" role="group">
+            <a href="/docs" class="btn btn-outline-primary">
+              <i class="glyphicon glyphicon-book"></i> Documentation
+            </a>
+            <a href="mailto:support@example.com" class="btn btn-outline-secondary">
+              <i class="glyphicon glyphicon-envelope"></i> Email Support
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

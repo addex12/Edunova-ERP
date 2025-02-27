@@ -11,3 +11,6 @@ class Config:
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'fallback-jwt-secret-key')
     FLASK_ENV = os.getenv('FLASK_ENV', 'development')
     FLASK_DEBUG = os.getenv('FLASK_DEBUG', '1')
+    TEMPLATES_AUTO_RELOAD = True  
+    LOG_FILE = 'edunova.log'
+    LOG_LEVEL = 'INFO'

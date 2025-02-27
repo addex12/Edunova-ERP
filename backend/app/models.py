@@ -1,17 +1,17 @@
 from datetime import datetime
+from werkzeug.security import generate_password_hash
 from app import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(128))
-    role = db.Column(db.String(20), nullable=False)  # student, parent, teacher, admin
+    password_hash = db.Column(db.String(128), nullable=False)
+    role = db.Column(db.String(20), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    
-    # Relationships
-    student_profile = db.relationship('Student', backref='user', uselist=False)
-    teacher_profile = db.relationship('Teacher', backref='user', uselist=False)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
 
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -73,3 +73,11 @@ class StudentReport(db.Model):
     template_id = db.Column(db.Integer, db.ForeignKey('report_template.id'))
     generated_html = db.Column(db.Text)
     generated_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+class BackgroundTask(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    status = db.Column(db.String(20), default='pending')
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    completed_at = db.Column(db.DateTime)
+
