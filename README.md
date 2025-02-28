@@ -64,7 +64,7 @@ sudo apt install nodejs npm
 ### Backend Setup
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/edunova-erp.git
+git clone https://github.com/addex12/edunova-erp.git
 cd edunova-erp/backend
 
 # Virtual environment
