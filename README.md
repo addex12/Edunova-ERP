@@ -1,246 +1,144 @@
-Edunova ERP
+# Edunova ERP - School Management System
 
-Edunova ERP is a full-featured web-based School Management System built using Flask (Python) for the backend and React for the frontend. It provides tools for managing students, teachers, parents, and administrative tasks in an educational institution.
-Features
+A comprehensive web-based School Management System built with Flask and React, designed for educational institutions.
 
-    User Management:
+## 🚀 Features
 
-        Role-based access control (Admin, Teacher, Student, Parent).
+### User Management
+- Role-based access control (Admin, Teacher, Student, Parent)
+- JWT-based secure authentication
+- Password hashing for enhanced security
 
-        Secure authentication with JWT.
+### Admin Dashboard
+- System statistics and monitoring
+- Complete user management (CRUD)
+- Report template management
 
-        Password hashing for security.
+### Data Management
+- CSV bulk import for students and teachers
+- Report and data export functionality
 
-    Admin Dashboard:
+### Reporting
+- Customizable report card templates
+- Dynamic student data placeholders
 
-        System statistics and monitoring.
+### Monitoring
+- Real-time system metrics (CPU, memory, disk)
+- Audit-ready activity logging
 
-        User management (CRUD operations).
+## 🛠️ Tech Stack
 
-        Report template management.
+### Backend
+- Flask (Python)
+- Flask-SQLAlchemy
+- Flask-Migrate
+- Flask-Admin
+- Flask-JWT-Extended
+- PostgreSQL
 
-    Data Import/Export:
+### Frontend
+- React.js
+- Material-UI
+- Axios
 
-        Bulk import of students and teachers via CSV.
+### Tools
+- Alembic
+- Pandas
+- psutil
 
-        Export functionality for reports and data.
+## 📋 Prerequisites
 
-    Report Generation:
+```bash
+# Python 3.10+
+sudo apt install python3.10
 
-        Customizable report card templates.
+# PostgreSQL
+sudo apt install postgresql postgresql-contrib
 
-        Dynamic placeholders for student data.
+# Node.js
+sudo apt install nodejs npm
+```
 
-    System Monitoring:
+## ⚙️ Installation
 
-        Real-time system health metrics (CPU, memory, disk usage).
+### Backend Setup
+```bash
+# Clone repository
+git clone https://github.com/yourusername/edunova-erp.git
+cd edunova-erp/backend
 
-        Activity logs for auditing.
+# Virtual environment
+python3 -m venv venv
+source venv/bin/activate
 
-Technologies Used
+# Dependencies
+pip install -r requirements.txt
 
-    Backend:
+# Database setup
+sudo -u postgres createdb edunova
 
-        Flask (Python)
+# Environment configuration
+DATABASE_URL=postgresql://edunova:edunova@localhost/edunova
 
-        Flask-SQLAlchemy (ORM)
+# Migrations
+flask db init
+flask db migrate -m "Initial migration"
+flask db upgrade
 
-        Flask-Migrate (Database migrations)
+# Start server
+flask run
+```
 
-        Flask-Admin (Admin interface)
+### Frontend Setup
+```bash
+cd ../frontend
+npm install
+npm start
+```
 
-        Flask-JWT-Extended (Authentication)
+Access the application at: `http://localhost:3000`
 
-        PostgreSQL (Database)
+## 🔧 Usage
 
-    Frontend:
+### Admin Portal
+Access at: `http://localhost:5000/admin`
+- Dashboard overview
+- User management
+- Report management
+- Data import/export
 
-        React.js
+### API Endpoints
 
-        Material-UI (UI components)
+#### Authentication
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User authentication
 
-        Axios (HTTP requests)
+#### Users
+- `GET /api/users` - List users
+- `POST /api/users` - Create user
+- `PUT /api/users/<id>` - Update user
+- `DELETE /api/users/<id>` - Delete user
 
-    Other Tools:
+#### Reports
+- `GET /api/reports` - List reports
+- `POST /api/reports` - Create report
+- `PUT /api/reports/<id>` - Update report
+- `DELETE /api/reports/<id>` - Delete report
 
-        Alembic (Database migrations)
+## 🤝 Contributing
 
-        Pandas (Data processing for CSV imports)
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-        psutil (System monitoring)
+## 📄 License
 
-Setup Instructions
-Prerequisites
+MIT License - see [LICENSE](LICENSE) file
 
-    Python 3.10+:
-    bash
-    Copy
+## 📞 Contact
 
-    sudo apt install python3.10
-
-    PostgreSQL:
-    bash
-    Copy
-
-    sudo apt install postgresql postgresql-contrib
-
-    Node.js (for frontend):
-    bash
-    Copy
-
-    sudo apt install nodejs npm
-
-Backend Setup
-
-    Clone the repository:
-    bash
-    Copy
-
-    git clone https://github.com/yourusername/edunova-erp.git
-    cd edunova-erp/backend
-
-    Create a virtual environment:
-    bash
-    Copy
-
-    python3 -m venv venv
-    source venv/bin/activate
-
-    Install dependencies:
-    bash
-    Copy
-
-    pip install -r requirements.txt
-
-    Set up the database:
-
-        Create a PostgreSQL database:
-        bash
-        Copy
-
-        sudo -u postgres createdb edunova
-
-        Update the database URL in .env:
-        Copy
-
-        DATABASE_URL=postgresql://edunova:edunova@localhost/edunova
-
-    Run migrations:
-    bash
-    Copy
-
-    flask db init
-    flask db migrate -m "Initial migration"
-    flask db upgrade
-
-    Start the backend server:
-    bash
-    Copy
-
-    flask run
-
-Frontend Setup
-
-    Navigate to the frontend directory:
-    bash
-    Copy
-
-    cd ../frontend
-
-    Install dependencies:
-    bash
-    Copy
-
-    npm install
-
-    Start the development server:
-    bash
-    Copy
-
-    npm start
-
-    Access the frontend at:
-    Copy
-
-    http://localhost:3000
-
-Usage
-Admin Interface
-
-Access the admin interface at:
-Copy
-
-http://localhost:5000/admin
-
-    Dashboard: View system statistics and health metrics.
-
-    Users: Manage user accounts (create, update, delete).
-
-    Reports: Create and manage report templates.
-
-    Data Import: Bulk import data via CSV files.
-
-API Endpoints
-
-    Authentication:
-
-        POST /api/auth/register: Register a new user.
-
-        POST /api/auth/login: Authenticate and receive a JWT token.
-
-    User Management:
-
-        GET /api/users: List all users.
-
-        POST /api/users: Create a new user.
-
-        PUT /api/users/<id>: Update a user.
-
-        DELETE /api/users/<id>: Delete a user.
-
-    Reports:
-
-        GET /api/reports: List all report templates.
-
-        POST /api/reports: Create a new report template.
-
-        PUT /api/reports/<id>: Update a report template.
-
-        DELETE /api/reports/<id>: Delete a report template.
-
-Contributing
-
-    Fork the repository.
-
-    Create a new branch:
-    bash
-    Copy
-
-    git checkout -b feature/your-feature-name
-
-    Commit your changes:
-    bash
-    Copy
-
-    git commit -m "Add your feature"
-
-    Push to the branch:
-    bash
-    Copy
-
-    git push origin feature/your-feature-name
-
-    Open a pull request.
-
-License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-Contact
-
-For questions or feedback, please contact:
-
-    Your Name
-
-    Email: your.email@example.com
-
-    GitHub: yourusername
+Your Name
+- Email: your.email@example.com
+- GitHub: [@yourusername](https://github.com/yourusername)
