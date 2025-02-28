@@ -141,4 +141,4 @@ MIT License - see [LICENSE](LICENSE) file
 
 Your Name
 - Email: your.email@example.com
-- GitHub: [@yourusername](https://github.com/yourusername)
+- GitHub: [@addex12](https://github.com/addex12)
