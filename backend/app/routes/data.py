@@ -11,7 +11,7 @@ data_bp = Blueprint('data', __name__, url_prefix='/api/data')
 def import_students():
     if 'file' not in request.files:
         return jsonify({'error': 'No file uploaded'}), 400
-    
+
     file = request.files['file']
     if not file.filename.endswith('.csv'):
         return jsonify({'error': 'Invalid file type'}), 400

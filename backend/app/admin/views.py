@@ -25,7 +25,7 @@ class UserAdminView(ModelView):
     column_filters = ['role']
     form_columns = ['username', 'email', 'role', 'password']
     column_exclude_list = ['password_hash']
-    
+
     # Corrected form_extra_fields definition
     form_extra_fields = {
         'password': PasswordField(
@@ -36,7 +36,7 @@ class UserAdminView(ModelView):
             ]
         )
     }
-    
+
     def on_model_change(self, form, model, is_created):
         if form.password.data:
             model.password_hash = generate_password_hash(form.password.data)
@@ -45,13 +45,13 @@ class ReportAdminView(ModelView):
     column_list = ['name', 'created_at', 'modified_at']
     form_columns = ['name', 'template_html']
     column_searchable_list = ['name']
-    
+
     form_args = {
         'name': {
             'validators': [validators.DataRequired()]
         }
     }
-    
+
     def on_model_change(self, form, model, is_created):
         model.modified_at = datetime.utcnow()
 
