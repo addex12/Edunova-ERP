@@ -23,12 +23,12 @@ def create_template():
 def generate_report(student_id):
     template = ReportTemplate.query.get(request.json['template_id'])
     student = Student.query.get(student_id)
-    
+
     rendered_html = template.template_html.format(
         student_name=student.user.username,
         grades={grade.subject: grade.marks for grade in student.grades}
     )
-    
+
     new_report = StudentReport(
         student_id=student_id,
         template_id=template.id,

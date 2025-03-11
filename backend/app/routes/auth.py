@@ -9,7 +9,7 @@ auth_bp = Blueprint('auth', __name__)
 @auth_bp.route('/', methods=['GET'])
 def home():
     return redirect(url_for('admin.index'))
-    
+
 @auth_bp.route('/register', methods=['POST'])
 def register():
     # Get JSON data from the request
